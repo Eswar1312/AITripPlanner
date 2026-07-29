@@ -273,12 +273,6 @@ Once Vercel finishes deploying your site (e.g., `https://text2trip.vercel.app`):
 - **Body**: `{ "prompt": "Plan a 3-day trip to Goa..." }`
 - **Response**: `{ "success": true, "data": { ...tripObject } }`
 
-### `POST /api/refine-trip`
-- **Body**: `{ "trip": { ...existingTrip }, "refinement": "Reduce budget" }`
-- **Response**: `{ "success": true, "data": { ...updatedTrip } }`
-
-### `GET /api/health`
-- **Response**: `{ "status": "ok", "timestamp": "...", "geminiKeyConfigured": true }`
 
 ---
 
@@ -290,6 +284,3 @@ Once Vercel finishes deploying your site (e.g., `https://text2trip.vercel.app`):
 
 ---
 
-## 📜 License
-
-Distributed under the MIT License.
