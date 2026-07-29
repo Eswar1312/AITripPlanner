@@ -6,7 +6,7 @@
 
 ## Website Live Link
 
-**[Talk2Trip]([https://render.com](https://ai-trip-planner-six-murex.vercel.app/))**
+**[Talk2Trip](https://ai-trip-planner-six-murex.vercel.app/)**
 
 
 ## 📋 Table of Contents
