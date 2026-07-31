@@ -140,8 +140,13 @@ CLIENT_ORIGIN=http://localhost:5173
    # Install frontend dependencies
    npm install
 
+   #Install Tailwind css
+   npm install tailwindcss @tailwindcss/vite
+   
    # Install backend dependencies
    cd server && npm install && cd ..
+
+   
    ```
 
 2. **Configure Environment Variables**:
@@ -160,126 +165,6 @@ CLIENT_ORIGIN=http://localhost:5173
 
 ---
 
-## 🚢 Complete Deployment Guide
-
-Follow these step-by-step instructions to deploy **Text2Trip** to production for free using **GitHub**, **Render** (for Backend), and **Vercel** (for Frontend).
-
----
-
-### Step 1: Check `.gitignore`
-
-Ensure your `.gitignore` file includes all build outputs and secret environment files so your `GEMINI_API_KEY` is never committed to GitHub:
-
-```gitignore
-# Dependencies
-node_modules/
-**/node_modules/
-
-# Production build outputs
-dist/
-dist-ssr/
-
-# Environment files
-.env
-.env.local
-.env.development.local
-.env.test.local
-.env.production.local
-**/.env
-**/.env.local
-
-# OS metadata & Logs
-.DS_Store
-Thumbs.db
-*.log
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-```
-
----
-
-### Step 2: Push to GitHub
-
-1. Open your terminal in the project root (`/Users/eswarreddy/Downloads/fp`).
-2. Initialize git and commit your files:
-   ```bash
-   # Initialize repository
-   git init
-
-   # Stage all files
-   git add .
-
-   # Commit changes
-   git commit -m "Initial commit - Text2Trip application"
-
-   # Rename branch to main
-   git branch -M main
-   ```
-3. Create a new empty repository on **[GitHub](https://github.com/new)** (e.g. `text2trip`).
-4. Link your local repo and push:
-   ```bash
-   git remote add origin https://github.com/YOUR_GITHUB_USERNAME/text2trip.git
-   git push -u origin main
-   ```
-
----
-
-### Step 3: Deploy Backend (Render.com)
-
-1. Sign up / log in to **[Render.com](https://render.com)**.
-2. Click **New +** → **Web Service**.
-3. Select your `text2trip` GitHub repository.
-4. Configure the service:
-   - **Name**: `text2trip-backend`
-   - **Root Directory**: `server` *(Crucial step!)*
-   - **Runtime**: `Node`
-   - **Build Command**: `npm install`
-   - **Start Command**: `npm start`
-5. Under **Environment Variables**, click **Add Environment Variable**:
-   - `GEMINI_API_KEY` = `your_gemini_api_key_from_google`
-   - `PORT` = `5001`
-   - `CLIENT_ORIGIN` = `*` *(Temporary until Vercel URL is created)*
-6. Click **Create Web Service**.
-7. Once deployed, copy your live backend URL (e.g., `https://text2trip-backend.onrender.com`).
-
----
-
-### Step 4: Deploy Frontend (Vercel)
-
-1. Sign up / log in to **[Vercel.com](https://vercel.com)**.
-2. Click **Add New...** → **Project** and import your `text2trip` repository.
-3. Configure the Vercel project:
-   - **Framework Preset**: `Vite`
-   - **Root Directory**: `./` (leave default)
-   - **Build Command**: `npm run build`
-   - **Output Directory**: `dist`
-4. Expand **Environment Variables** and add:
-   - **Key**: `VITE_API_URL`
-   - **Value**: `https://text2trip-backend.onrender.com/api` *(Your Render backend URL + `/api`)*
-5. Click **Deploy**.
-
----
-
-### Step 5: Post-Deployment CORS Setup
-
-Once Vercel finishes deploying your site (e.g., `https://text2trip.vercel.app`):
-
-1. Go back to your **Render Dashboard** → `text2trip-backend` → **Environment Variables**.
-2. Update `CLIENT_ORIGIN` to your official frontend URL:
-   - `CLIENT_ORIGIN` = `https://text2trip.vercel.app`
-3. Save changes. Render will automatically redeploy the backend with strict CORS protection.
-
----
-
-## 📡 API Reference
-
-### `POST /api/generate-trip`
-- **Body**: `{ "prompt": "Plan a 3-day trip to Goa..." }`
-- **Response**: `{ "success": true, "data": { ...tripObject } }`
-
-
----
 
 ## 🛡️ Error Handling & Resilience
 
